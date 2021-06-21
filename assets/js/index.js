@@ -21,12 +21,12 @@ let questionBank = [
 var currentSelection; 
 var currentQuestion = 0;
 
-
 function populateQuestion(questionNum){
 
 
     console.log();
 }
+
 //This function populates answers to the buttons
 function populateAnswers(questionNum){
 
@@ -45,6 +45,7 @@ function populateAnswers(questionNum){
     return;
 }
 
+//Targets answer buttons, activates the selected button and logs the value as currentSelection. 
 function selectAnswer(){
     $('#quiz button').on('click', function() {
         var selectedButton = $(this);
@@ -55,6 +56,8 @@ function selectAnswer(){
       });
 }
 
+//Compares the selectedButton value to the correct answer stored in the questionBank
+//Based if the value matches, it moves to the next question or it removes time from the timer
 function submitAnswer() {
 $('#submit').on('click',function(){
        
@@ -76,6 +79,7 @@ function goToHighScore(){}
 
 
 
+//Nothing is called until init.
 function init(){
     populateQuestion(0);
     populateAnswers(0);
