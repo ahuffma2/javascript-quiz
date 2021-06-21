@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Javascript Quiz</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--BOOTSTRAP IMPORTS-->
+	<!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+
+    <div class="container-fluid p-2 my-3 bg-primary text-white flex-column d-flex justify-content-center text-center">
+      <h1>Test Your Knowledge</h1> 
+        <p class="text-center">Click start to begin your quiz!</p>     
+    </div> 
+
+    <div class ="d-flex justify-content-center p-4">
+    <button type = "button" class="btn btn-primary invisible" id="start-button">Start</button>
+    </div>
+
+    <!-- <p class="d-flex justify-content-center p-3" id="question">Hello yes this is a question. it is a good question. IT's the best question. I must ask said question </p> -->
+
+   <div class="container text-center">
+     <h2 class="q-num">Question 1</h2>
+     <p>Hello yes this is a question. it is a good question. IT's the best question. I must ask said questionHello yes this is a question. it is a good question. IT's the best question. I must ask said questionHello yes this is a question. it is a good question. IT's the best question. I must ask said questionHello yes this is a question. it is a good question. IT's the best question. I must ask said question</p>
+
+      <div class="btn-group-vertical p-3" id="quiz" >
+
+        <button type="button" value="0" class="btn btn-info mt-1" id="answer-1">Answer 1</button>
+        <button type="button" value="1" class="btn btn-info mt-1" id="answer-2">Answer 2</button>
+        <button type="button" value="2" class="btn btn-info mt-1" id="answer-3">Answer 3</button>
+        <button type="button" value="3 "class="btn btn-info mt-1" id="answer-4">Answer 4</button>
+      
+    </div>
+    </div>
+  
+    <div class="d-flex justify-content-center p-5">  
+      <button type = "button" class="btn btn-primary" id="submit">Submit</button>
+    </div>
+
+    <!--href highscore and time in the top right and left space-between -->
+
+  <script src="/assets/js/index.js"></script>
+  </body>
+</html>
