@@ -21,6 +21,15 @@ let questionBank = [
 var currentSelection; 
 var currentQuestion = 0;
 
+//Counts down and iterates the progress bar accordingly
+var timeLeft = 50;
+let timer = setInterval(function(){
+    $('.progress-bar').css({'width': (timeLeft*2) + '%'}).text('Time Left: ' + timeLeft + "s");
+    timeLeft--;
+ },1000);
+   
+
+
 //Assigns the question headers content to correspond to questionBank
 //When done calls the populateAnswers to populate the corresponding answers
 function populateQuestion(questionNum){
@@ -78,21 +87,21 @@ $('#submit').on('click',function(){
     //IF INCORRECT
     else {
         console.log("You got it wrong! :C");
-        //DECREASE TIMER BY 10
+        timeLeft -= 10;
     }
        
 });
 }
 
-
-
 function goToHighScore(){
+    clearInterval(timeLeft);
     //stops Timer
     //logs time
+    let score = timeLeft;
     //sends to highscore page.
         console.log("Go to High-score Page");
-}
 
+}
 
 //Nothing is called until init.
 function init(){
