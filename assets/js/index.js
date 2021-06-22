@@ -1,8 +1,6 @@
 //TODO
 //LOCAL STORE THE HIGH SCORE
 //ADD TO LIST  //THIS NEEDS MOST RESEARCH
-//REFACTOR goToHighscore()
-
 
 //An array of objects each containing a 
 //Question, List of Answers, and a Correct Answer
@@ -32,11 +30,9 @@ let questionBank = [
 var currentSelection;
 var timeLeft; 
 var currentQuestion = 0;
-var score = localStorage.getItem(score); 
-
+let storage = window.localStorage;
 
 //Counts down and iterates the progress bar accordingly
-function countdown(){
 var timer = setInterval(function(){
     $('.progress-bar').css({'width': (timeLeft*2) + '%'}).text('Time Left: ' + timeLeft + "s");
     timeLeft--;
@@ -46,7 +42,6 @@ var timer = setInterval(function(){
         goToHighScore();
     }
  },1000);
-}
 
 /*This function takes an index that represent which question and answers you want to use from questionBank[]
 When done calls the populateAnswers to populate the corresponding answers*/
@@ -123,43 +118,70 @@ function highScoreBtns(){
 
     //TAKES TO HIGHSCORE PAGE
     $('#highscore-btn').on('click',function(){
+        timeLeft = 0;
         goToHighScore();
     })
 
     //RELOADS PAGE TO PLAY AGAIN
     $('.reset').on('click',function(){
-        document.location.reload();
+        location.reload();
         init();
     });
 
     //CLEARS LOCAL STORAGE
     $('.clear-score').on('click',function(){
         localStorage.clear();
+        $('.list-group').empty();
         console.log("I cleared the storage");
     });
 }
 
 //Clears the screen of the quiz UI and Shows the Highscore UI
 //Halts the timer and logs the score and stores to local storage.
-function goToHighScore(){
 
-    countdown.timer = clearInterval(countdown.timer);
+let highScoreList = [];
+function goToHighScore(){
+    timer = clearInterval(timer);
     $('.quiz-holder').hide();
     $('.quiz-header').hide();
     $('.highscore-holder').show();
 
-    score = timeLeft;
-    localStorage.setItem("score", score);
-
-    //sends to highscore page.
     console.log("Go to High-score Page");
+    score = timeLeft;
+    $("h2").text(score);
+
+    for(i = 0; i < storage.length; i++)
+    {
+        highScoreList[i] = JSON.parse(storage.getItem(i));
+        $('.list-group').append('<li class="list-group-item">' + highScoreList[i].initial + ' : ' + highScoreList[i].score + '</li>');
+        console.log(highScoreList[i]);
+    }
+}
+
+function highScoreDisplay(score, initial){
+
+    //CREATES A SCORE OBJECT, SENDS TO LOCAL STORAGE, AND APPENDS TO THE LIST
+    let scoreObj = {score: timeLeft ,initial: initial};
+    storage.setItem(localStorage.length.toString(), JSON.stringify(scoreObj));
+    $('.list-group').append('<li class="list-group-item">' + scoreObj.initial + ' : ' + scoreObj.score + '</li>');
 
 }
+
+//Sends initials and score to highScoreDisplay on click of submit button
+var submitButton = $('.submit');
+function handleFormSubmit(event){
+    event.preventDefault();
+    var initials = $('input[name=initials]');
+    highScoreDisplay(score,initials.val());
+    $('.form-input').hide();
+    submitButton.hide();
+}
+submitButton.on('click', handleFormSubmit);
 
 //Nothing is called until init.
 function init(){
 
-    //manages various html elements
+    //hides everything except start
     $('.quiz-holder').hide();
     $('.highscore-holder').hide(); 
 
@@ -169,14 +191,12 @@ function init(){
         $('#start-button').hide();
         $('.quiz-holder').show();
         timeLeft = 50;
-        countdown();
     });
 
     populateQuestion(0);
     selectAnswer();
     submitAnswer();
     highScoreBtns();
-
 }
 
 init();
