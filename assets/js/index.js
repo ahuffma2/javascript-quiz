@@ -13,8 +13,8 @@ let questionBank = [
     {question: "Which of these are not a Javascript Data Type?", answerList: ["Strings","Numbers","Alert","Boolean"], correctAnswer: 2 },
     {question: "What is hoisting in Javascript?", answerList:["When you unfurl a sail.","When you lift something","When you loop through a method to iterate through it", "The unique behaviour where all variables and function declarations are moved to the top"], correctAnswer: 3},
     {question: "What does the '===' operator do?", answerList:["It checks whether its two operands are equal, and returns a boolean, checking to make sure both operands are of the same type and value", "Assigns a value to a variable and makes that variable unchangeable", "Checks to see if both operands are equal to each other", "Changes both values to the same value"], correctAnswer: 0},
-    {question: "Question 4", answerList: ["A1","A2","A3","A4"], correctAnswer: 2}
-
+    {question: "What type of variable is only visible inside the function it is declared in", answerList: ["Global Variable","Local Variable","Both of the above","None of the above"], correctAnswer: 1},
+    {question: "Which of the following is a ternary operator", answerList: [":","=","-","?"], correctAnswer: 3}
 ];
 
 //These variables are used to track which answer the users has picked and what question the quiz is on
@@ -68,7 +68,12 @@ $('#submit').on('click',function(){
     {
         console.log("You got it right!");
         currentQuestion++;
-        populateQuestion(currentQuestion);
+
+        //AS LONG AS THERE ARE QUESTIONS, ITERATE IF USER IS CORRECT, ELSE GO TO HIGH SCORE TO END THE GAME
+        if(currentQuestion < questionBank.length)
+            populateQuestion(currentQuestion);
+        else
+            goToHighScore();
     }
     //IF INCORRECT
     else {
@@ -80,8 +85,13 @@ $('#submit').on('click',function(){
 }
 
 
-function goToHighScore(){}
 
+function goToHighScore(){
+    //stops Timer
+    //logs time
+    //sends to highscore page.
+        console.log("Go to High-score Page");
+}
 
 
 //Nothing is called until init.
