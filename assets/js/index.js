@@ -1,3 +1,10 @@
+//TODO
+//MAKE A START BUTTON
+//LOCAL STORE THE HIGH SCORE
+//ADD TO LIST
+//CLEAR ON CLEAR.
+
+
 
 //These are the four answer buttons in the html
 let answers = [ 
@@ -34,12 +41,11 @@ let questionBank = [
 //These variables are used to track which answer the users has picked and what question the quiz is on
 var currentSelection; 
 var currentQuestion = 0;
-
+var timeLeft = 50;
 var score = localStorage.getItem(score); 
 
 //Counts down and iterates the progress bar accordingly
-var timeLeft = 50;
-let timer = setInterval(function(){
+var timer = setInterval(function(){
     $('.progress-bar').css({'width': (timeLeft*2) + '%'}).text('Time Left: ' + timeLeft + "s");
     timeLeft--;
 
@@ -48,7 +54,6 @@ let timer = setInterval(function(){
         goToHighScore();
     }
  },1000);
-   
 
 
 /*This function takes an index that represent which question and answers you want to use from questionBank[]
@@ -114,17 +119,29 @@ $('#submit').on('click',function(){
 });
 }
 
-function highScoreBtn(){
+function highScoreBtns(){
+
+    //TAKES TO HIGHSCORE PAGE
     $('#highscore-btn').on('click',function(){
-        console.log("I work");
         goToHighScore();
     })
-}
 
+    //RELOADS PAGE TO PLAY AGAIN
+    $('.reset').on('click',function(){
+        document.location.reload();
+        init();
+    });
+
+    //CLEARS LOCAL STORAGE
+    $('.clear-score').on('click',function(){
+        localStorage.clear();
+        console.log("I cleared the storage");
+    });
+}
 
 function goToHighScore(){
     //Stops Timer, Hides Quiz UI, Shows HighScore UI
-    clearInterval(timer);
+    timer = clearInterval(timer);
     $('.quiz-holder').hide();
     $('.highscore-holder').show();
 
@@ -132,17 +149,19 @@ function goToHighScore(){
     localStorage.setItem("score", score);
 
     //sends to highscore page.
-        console.log("Go to High-score Page");
+    console.log("Go to High-score Page");
 
 }
 
 //Nothing is called until init.
 function init(){
-    $('.highscore-holder').hide();
+    $('.quiz-holder').show();
+    $('.highscore-holder').hide(); 
+    timeLeft = 50;
     populateQuestion(0);
     selectAnswer();
     submitAnswer();
-    highScoreBtn();
+    highScoreBtns();
 }
 
 init();

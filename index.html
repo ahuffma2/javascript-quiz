@@ -23,7 +23,7 @@
     </div> 
 
     <div class ="d-flex justify-content-center ">
-    <button type = "button" class="btn btn-primary invisible" id="start-button">Start</button>
+    <button type = "button" class="btn btn-primary" id="start-button">Start</button>
     </div>
 
       <button type="button" class="btn btn-primary" id="highscore-btn">High Score</button>
@@ -54,8 +54,10 @@
   <div class = "highscore-holder">
 
     <div class="container-fluid bg-primary text-white flex-column d-flex justify-content-center text-center">
+
       <h1>High-Score Page</h1> 
-        <p class="text-center">Enter Your Initials to save your score!</p>     
+      <p class="text-center">Enter Your Initials to save your score!</p>     
+
     </div> 
 
     <div class ="d-flex justify-content-center p-4">   
@@ -75,7 +77,11 @@
       </div>
 
     </div>
-
+ 
+    <div class="btn-group fixed-bottom" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-secondary reset">Play Again</button>
+      <button type="button" class="btn btn-secondary clear-score">Clear Scores</button>
+    </div>
   </div>
   <script src="/assets/js/index.js"></script>
   </body>
