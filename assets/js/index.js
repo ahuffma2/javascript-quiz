@@ -21,10 +21,12 @@ let questionBank = [
 var currentSelection; 
 var currentQuestion = 0;
 
+//Assigns the question headers content to correspond to questionBank
+//When done calls the populateAnswers to populate the corresponding answers
 function populateQuestion(questionNum){
-
-
-    console.log();
+    $("#q-num").text("Question " + (questionNum+1)); 
+    $("#question").text(questionBank[questionNum].question);
+    populateAnswers(questionNum);
 }
 
 //This function populates answers to the buttons
@@ -61,11 +63,14 @@ function selectAnswer(){
 function submitAnswer() {
 $('#submit').on('click',function(){
        
+    //IF CORRECT
     if(currentSelection == questionBank[currentQuestion].correctAnswer)
     {
         console.log("You got it right!");
-        //MOVE TO NEXT QUESTION
+        currentQuestion++;
+        populateQuestion(currentQuestion);
     }
+    //IF INCORRECT
     else {
         console.log("You got it wrong! :C");
         //DECREASE TIMER BY 10
@@ -82,7 +87,6 @@ function goToHighScore(){}
 //Nothing is called until init.
 function init(){
     populateQuestion(0);
-    populateAnswers(0);
     selectAnswer();
     submitAnswer();
 }
