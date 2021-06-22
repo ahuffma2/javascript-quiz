@@ -1,18 +1,8 @@
 //TODO
-//MAKE A START BUTTON
 //LOCAL STORE THE HIGH SCORE
-//ADD TO LIST
-//CLEAR ON CLEAR.
+//ADD TO LIST  //THIS NEEDS MOST RESEARCH
+//REFACTOR goToHighscore()
 
-
-
-//These are the four answer buttons in the html
-let answers = [ 
- answer1 = document.getElementById("answer-1"),
- answer2 = document.getElementById("answer-2"),
- answer3 = document.getElementById("answer-3"),
- answer4 = document.getElementById("answer-4"),
-];
 
 //An array of objects each containing a 
 //Question, List of Answers, and a Correct Answer
@@ -39,12 +29,14 @@ let questionBank = [
 ];
 
 //These variables are used to track which answer the users has picked and what question the quiz is on
-var currentSelection; 
+var currentSelection;
+var timeLeft; 
 var currentQuestion = 0;
-var timeLeft = 50;
 var score = localStorage.getItem(score); 
 
+
 //Counts down and iterates the progress bar accordingly
+function countdown(){
 var timer = setInterval(function(){
     $('.progress-bar').css({'width': (timeLeft*2) + '%'}).text('Time Left: ' + timeLeft + "s");
     timeLeft--;
@@ -54,7 +46,7 @@ var timer = setInterval(function(){
         goToHighScore();
     }
  },1000);
-
+}
 
 /*This function takes an index that represent which question and answers you want to use from questionBank[]
 When done calls the populateAnswers to populate the corresponding answers*/
@@ -66,6 +58,14 @@ function populateQuestion(questionNum){
 
 //This function populates answers to the buttons
 function populateAnswers(questionNum){
+
+    //Each of the answer button elements
+    let answers = [ 
+        answer1 = document.getElementById("answer-1"),
+        answer2 = document.getElementById("answer-2"),
+        answer3 = document.getElementById("answer-3"),
+        answer4 = document.getElementById("answer-4"),
+       ];
 
     //ensures that there is a question to match the questionNum 
     if(questionBank[questionNum] == null )
@@ -79,7 +79,6 @@ function populateAnswers(questionNum){
     for(var i = 0; i< answers.length; i++){
        answers[i].textContent = questionBank[questionNum].answerList[i].toString();   
     }
-    return;
 }
 
 //Targets answer buttons, activates the selected button and logs the value as currentSelection. 
@@ -119,6 +118,7 @@ $('#submit').on('click',function(){
 });
 }
 
+//Handles buttons that involve the high score page
 function highScoreBtns(){
 
     //TAKES TO HIGHSCORE PAGE
@@ -139,10 +139,13 @@ function highScoreBtns(){
     });
 }
 
+//Clears the screen of the quiz UI and Shows the Highscore UI
+//Halts the timer and logs the score and stores to local storage.
 function goToHighScore(){
-    //Stops Timer, Hides Quiz UI, Shows HighScore UI
-    timer = clearInterval(timer);
+
+    countdown.timer = clearInterval(countdown.timer);
     $('.quiz-holder').hide();
+    $('.quiz-header').hide();
     $('.highscore-holder').show();
 
     score = timeLeft;
@@ -155,13 +158,25 @@ function goToHighScore(){
 
 //Nothing is called until init.
 function init(){
-    $('.quiz-holder').show();
+
+    //manages various html elements
+    $('.quiz-holder').hide();
     $('.highscore-holder').hide(); 
-    timeLeft = 50;
+
+    //on click of the start button, show quiz UI and start the countdown
+    $('#start-button').on('click',function(){
+        $('.quiz-header').hide();
+        $('#start-button').hide();
+        $('.quiz-holder').show();
+        timeLeft = 50;
+        countdown();
+    });
+
     populateQuestion(0);
     selectAnswer();
     submitAnswer();
     highScoreBtns();
+
 }
 
 init();
