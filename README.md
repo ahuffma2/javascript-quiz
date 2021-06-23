@@ -6,7 +6,7 @@ The system needed to iterate through questions and penalize the user if they got
 The systems scoring is based on how fast they can complete the quiz and the remaining time left is calculated into the score.
 The system needed a locally stored highscore, per page call, and a way to log your own scores and clear them if desired. 
 
-##Code
+## Code
 First I created an array of objects to hold each question and the respective answers.
 The object sructure is as follows:
 ```
@@ -98,4 +98,12 @@ var timer = setInterval(function(){
         goToHighScore();
  },1000);
  ```
- 
+ ## Techology Used
+ * JAVASCRIPT
+ * HTML
+ * CSS
+ * JQUERY
+ * BOOTSTRAP
+
+## Author 
+[Austin Huffman] 
