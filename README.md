@@ -68,3 +68,34 @@ When submit is clicked , I compare the value of the selected button with the ans
         timeLeft -= 10;
     }
 ```
+For high-score saving to local storage I used this method to log indiviual scores once the user has completed the quiz. This method is passed the time left on completion, and the initials typed into the page's form, and converts that into an object. I then stringify that object for storage into the local storage, as storage can only take links. I also assign id by whatever length the current storage is at. so first entry is 0, second is 1, and so on. 
+
+```
+function highScoreDisplay(score, initial){
+    //CREATES A SCORE OBJECT, SENDS TO LOCAL STORAGE, AND APPENDS TO THE LIST
+    let scoreObj = {score: timeLeft ,initial: initial};
+    storage.setItem(localStorage.length.toString(), JSON.stringify(scoreObj));
+    $('.list-group').append('<li class="list-group-item">' + scoreObj.initial + ' : ' + scoreObj.score + '</li>');
+}
+```
+
+I iterate through the storage to display the list on entry to the high-score page. I use JSON.parse to un-stringify the item I'm fetching, and assign it to an array (highScoreList). From there I simply append a list object that contains the corrosponding score object to get them to display in HTML. 
+```
+ for(i = 0; i < storage.length; i++)
+    {
+        highScoreList[i] = JSON.parse(storage.getItem(i));
+        $('.list-group').append('<li class="list-group-item">' + highScoreList[i].initial + ' : ' + highScoreList[i].score + '</li>');
+        console.log(highScoreList[i]);
+    }
+```
+The final function of note is the timer function, which iterates a progress bar corresponding to the time left and sends the user to the high-score page if the timer reaches 0. timeLeft is initialized elsewhere. 
+
+```
+var timer = setInterval(function(){
+    $('.progress-bar').css({'width': (timeLeft*2) + '%'}).text('Time Left: ' + timeLeft + "s");
+    timeLeft--;
+    if(timeLeft <= 0)
+        goToHighScore();
+ },1000);
+ ```
+ 
