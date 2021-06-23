@@ -106,4 +106,4 @@ var timer = setInterval(function(){
  },1000);
  ```
 ## Author 
-[Austin Huffman](https://www.linkedin.com/in/austinhuffman/)
+[Austin Huffman](https://www.linkedin.com/in/austinhuffman)
