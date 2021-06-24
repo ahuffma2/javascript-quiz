@@ -1,5 +1,4 @@
-# javascript-quiz
-This project was to build a template to make an online, interactive quiz, which you can customize to test a user on whatever topics you want. The quiz can take as many questions as desired and will scale accordingly. 
+# javascript-quiz 
 
 ## Client Requirements
 The client wanted a a system that would prompt users with a quiz.
