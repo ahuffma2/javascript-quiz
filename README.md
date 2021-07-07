@@ -107,3 +107,6 @@ var timer = setInterval(function(){
  ```
 ## Author 
 [Austin Huffman](https://www.linkedin.com/in/ahuffma2)
+
+## License
+MIT
